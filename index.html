@@ -471,15 +471,18 @@
       background: var(--pearl);
       break-inside: avoid;
       margin-bottom: 4px;
+      transition: opacity 0.6s ease-in;
     }
-
     .collage-item img {
       width: 100%;
       height: auto;
       display: block;
-      transition: transform 0.6s var(--ease-out);
+      transition: transform 0.6s var(--ease-out), opacity 0.8s ease-in;
+      opacity: 0;
     }
-
+    .collage-item img.loaded {
+      opacity: 1;
+    }
     .collage-item:hover img { transform: scale(1.02); }
 
     .collage-caption {
@@ -1699,6 +1702,11 @@
     let currentItems = Array.from(collageItems);
 
     collageItems.forEach((item, index) => {
+      const img = item.querySelector('img');
+      if (img) {
+        img.addEventListener('load', () => img.classList.add('loaded'));
+        if (img.complete) img.classList.add('loaded');
+      }
       item.addEventListener('click', () => openLightbox(index));
     });
 
