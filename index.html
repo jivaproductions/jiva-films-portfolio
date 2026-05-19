@@ -81,9 +81,9 @@
     }
 
     nav.scrolled {
-      background: var(--warm-white);
+      background: var(--charcoal);
       padding: 16px 48px;
-      box-shadow: 0 1px 0 var(--pearl);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.1);
     }
 
     .logo {
@@ -92,7 +92,7 @@
       font-weight: 500;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--warm-white);
+      color: var(--charcoal);
       text-decoration: none;
       transition: all 0.4s var(--ease-smooth);
       display: flex;
@@ -105,7 +105,7 @@
       opacity: 0;
       pointer-events: none;
     }
-    nav.scrolled .logo { color: var(--charcoal); }
+    nav.scrolled .logo { color: var(--warm-white); }
     nav.scrolled .logo img {
       height: 40px;
       opacity: 1;
@@ -125,13 +125,13 @@
       font-size: 1rem;
       font-weight: 400;
       letter-spacing: 0.08em;
-      color: rgba(255,255,255,0.85);
+      color: var(--charcoal);
       text-decoration: none;
       position: relative;
       transition: color 0.3s;
     }
 
-    nav.scrolled .nav-links a { color: var(--charcoal); }
+    nav.scrolled .nav-links a { color: var(--warm-white); }
     nav.scrolled .nav-links {
       justify-content: flex-end;
     }
@@ -159,11 +159,11 @@
       display: block;
       width: 24px;
       height: 1px;
-      background: var(--warm-white);
+      background: var(--charcoal);
       margin: 6px 0;
       transition: background 0.3s;
     }
-    nav.scrolled .menu-toggle span { background: var(--charcoal); }
+    nav.scrolled .menu-toggle span { background: var(--warm-white); }
 
     .nav-center {
       display: flex;
