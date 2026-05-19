@@ -81,7 +81,7 @@
     }
 
     nav.scrolled {
-      background: var(--charcoal);
+      background: #FFFFFF;
       padding: 16px 48px;
       box-shadow: 0 1px 0 rgba(0,0,0,0.1);
     }
@@ -105,7 +105,7 @@
       opacity: 0;
       pointer-events: none;
     }
-    nav.scrolled .logo { color: var(--warm-white); }
+    nav.scrolled .logo { color: var(--charcoal); }
     nav.scrolled .logo img {
       height: 40px;
       opacity: 1;
@@ -131,15 +131,17 @@
       transition: color 0.3s;
     }
 
-    nav.scrolled .nav-links a { color: var(--warm-white); }
+    nav.scrolled .nav-links a { color: var(--charcoal); }
     nav.scrolled .nav-links {
       justify-content: flex-end;
     }
 
     nav.scrolled .nav-center {
-      transform: translateX(-50%) scale(0.95);
-      opacity: 0;
-      visibility: hidden;
+      left: auto;
+      right: 48px;
+      transform: translateX(0);
+      opacity: 1;
+      visibility: visible;
     }
 
     .nav-links a::after {
@@ -173,7 +175,7 @@
       transform: translateX(-50%);
       display: flex;
       justify-content: center;
-      transition: all 0.6s var(--ease-smooth);
+      transition: all 0.4s var(--ease-smooth);
     }
 
     /* ─── Mobile Nav ─── */
@@ -1611,84 +1613,9 @@
       <h2 class="films-title reveal">Wedding Films</h2>
     </div>
 
-    <div class="films-grid">
-      
-    
-          </div>
-          <span class="film-title">Maithili & Suraj</span>
-          <span class="film-duration">Watch on YouTube</span>
-        </div>
-      </a>
-      <a href="https://youtu.be/8DQsta6MuIw" target="_blank" class="film-item reveal">
-        <img src="https://img.youtube.com/vi/8DQsta6MuIw/maxresdefault.jpg" alt="Rujuta & Himanshu" loading="lazy">
-        <div class="film-overlay">
-          <div class="film-play">
-            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          </div>
-          <span class="film-title">Rujuta & Himashu</span>
-          <span class="film-duration">Watch on YouTube</span>
-        </div>
-      </a>
-      <a href="https://youtu.be/Bdr42kh_yf8" target="_blank" class="film-item reveal">
-        <img src="https://img.youtube.com/vi/Bdr42kh_yf8/maxresdefault.jpg" alt="Shekher & Priya" loading="lazy">
-        <div class="film-overlay">
-          <div class="film-play">
-            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          </div>
-          <span class="film-title">Shekhar & Priya</span>
-          <span class="film-duration">Watch on YouTube</span>
-        </div>
-      </a>
-      <a href="https://youtu.be/b2ZBFhXDjCE" target="_blank" class="film-item reveal">
-        <img src="https://img.youtube.com/vi/b2ZBFhXDjCE/maxresdefault.jpg" alt="Hetvi & Darshan" loading="lazy">
-        <div class="film-overlay">
-          <div class="film-play">
-            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          </div>
-          <span class="film-title">Hetvi & Darshan</span>
-          <span class="film-duration">Watch on YouTube</span>
-        </div>
-      </a>
-      <a href="https://youtu.be/a9RDXmtOyCg" target="_blank" class="film-item reveal">
-        <img src="https://img.youtube.com/vi/a9RDXmtOyCg/maxresdefault.jpg" alt="Sameep & Divya" loading="lazy">
-        <div class="film-overlay">
-          <div class="film-play">
-            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          </div>
-          <span class="film-title">Sameep & Divya</span>
-          <span class="film-duration">Watch on YouTube</span>
-        </div>
-      </a>
-      <a href="https://youtu.be/fvq3ItUGy8E" target="_blank" class="film-item reveal">
-        <img src="https://img.youtube.com/vi/fvq3ItUGy8E/maxresdefault.jpg" alt="Tushar & Pratibha" loading="lazy">
-        <div class="film-overlay">
-          <div class="film-play">
-            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          </div>
-          <span class="film-title">Tushar & Pratibha</span>
-          <span class="film-duration">Watch on YouTube</span>
-        </div>
-      </a>
-      <a href="https://youtu.be/D7A4yolxZuM" target="_blank" class="film-item reveal">
-        <img src="https://img.youtube.com/vi/D7A4yolxZuM/maxresdefault.jpg" alt="Vishwa + Nishi" loading="lazy">
-        <div class="film-overlay">
-          <div class="film-play">
-            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          </div>
-          <span class="film-title">Vishwa & Nishi</span>
-          <span class="film-duration">Watch on YouTube</span>
-        </div>
-      </a>
-      <a href="https://youtu.be/IWoX-6tBY7g" target="_blank" class="film-item reveal">
-        <img src="https://img.youtube.com/vi/IWoX-6tBY7g/maxresdefault.jpg" alt="Rhea & Paras" loading="lazy">
-        <div class="film-overlay">
-          <div class="film-play">
-            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          </div>
-          <span class="film-title">Rhea & Paras</span>
-          <span class="film-duration">Watch on YouTube</span>
-        </div>
-      </a>
+    <div class="films-stack-container">
+      <div class="stack-stage" id="filmsStack"></div>
+      <div class="stack-dots" id="filmsDots"></div>
     </div>
   </section>
 
@@ -1774,7 +1701,7 @@
       <a href="https://www.instagram.com/jiva_films?igsh=YnJlaGVmb3kwemZy&utm_source=qr" target="_blank" aria-label="Instagram">
         <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
       </a>
-      <a href="https://www.youtube.com/@JivaProductions" target="_blank" aria-label="YouTube">
+      <a href="https://www.youtube.com/@Jiva_films" target="_blank" aria-label="YouTube">
         <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" stroke="none"/></svg>
       </a>
     </div>
@@ -1928,6 +1855,81 @@
       document.getElementById('contactForm').style.display = 'none';
       document.getElementById('formSuccess').classList.add('show');
     });
+
+    // 3D Film Card Stack
+    const filmsData = [
+      { title: "Maithili & Suraj", url: "https://youtu.be/vLm-TKh71Lc", img: "https://img.youtube.com/vi/vLm-TKh71Lc/maxresdefault.jpg" },
+      { title: "Rujuta & Himanshu", url: "https://youtu.be/8DQsta6MuIw", img: "https://img.youtube.com/vi/8DQsta6MuIw/maxresdefault.jpg" },
+      { title: "Shekher & Priya", url: "https://youtu.be/Bdr42kh_yf8", img: "https://img.youtube.com/vi/Bdr42kh_yf8/maxresdefault.jpg" },
+      { title: "Hetvi & Darshan", url: "https://youtu.be/b2ZBFhXDjCE", img: "https://img.youtube.com/vi/b2ZBFhXDjCE/maxresdefault.jpg" },
+      { title: "Sameep & Divya", url: "https://youtu.be/a9RDXmtOyCg", img: "https://img.youtube.com/vi/a9RDXmtOyCg/maxresdefault.jpg" },
+      { title: "Rhea & Paras", url: "https://youtu.be/IWoX-6tBY7g", img: "https://img.youtube.com/vi/IWoX-6tBY7g/maxresdefault.jpg" },
+      { title: "Tushar & Pratibha", url: "https://youtu.be/fvq3ItUGy8E", img: "https://img.youtube.com/vi/fvq3ItUGy8E/maxresdefault.jpg" },
+      { title: "Vishwa & Nishi", url: "https://youtu.be/D7A4yolxZuM", img: "https://img.youtube.com/vi/D7A4yolxZuM/maxresdefault.jpg" }
+    ];
+
+    let activeFilmIndex = 0;
+    const stackStage = document.getElementById('filmsStack');
+    const dotsContainer = document.getElementById('filmsDots');
+    const cards = [];
+
+    function initStack() {
+      if (!stackStage || !dotsContainer) return;
+
+      filmsData.forEach((film, i) => {
+        // Create Card
+        const card = document.createElement('div');
+        card.className = 'stack-card';
+        card.innerHTML = `
+          <a href="${film.url}" target="_blank" style="display:block; width:100%; height:100%; text-decoration:none;">
+            <img src="${film.img}" alt="${film.title}" loading="lazy">
+            <div class="stack-card-overlay">
+              <h3 class="stack-card-title">${film.title}</h3>
+              <span class="stack-card-role">Wedding Film</span>
+            </div>
+          </a>
+        `;
+        card.addEventListener('click', () => setActive(i));
+        stackStage.appendChild(card);
+        cards.push(card);
+
+        // Create Dot
+        const dot = document.createElement('div');
+        dot.className = `stack-dot ${i === 0 ? 'active' : ''}`;
+        dot.addEventListener('click', () => setActive(i));
+        dotsContainer.appendChild(dot);
+      });
+
+      updateStack();
+    }
+
+    function setActive(index) {
+      activeFilmIndex = index;
+      updateStack();
+
+      document.querySelectorAll('.stack-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    }
+
+    function updateStack() {
+      const lift = 0;
+      const scale = 1;
+
+      cards.forEach((card, i) => {
+        const off = i - activeFilmIndex;
+        const x = off * 270;
+        const rotateZ = off * 16;
+        const z = -Math.abs(off) * 140;
+
+        card.style.transform = `translateX(${x}px) translateY(${lift}px) rotateZ(${rotateZ}deg) translateZ(${z}px) scale(${scale})`;
+        card.style.zIndex = 100 - Math.abs(off);
+        card.style.opacity = Math.abs(off) > 3 ? '0' : '1';
+        card.style.pointerEvents = off === 0 ? 'auto' : 'none';
+      });
+    }
+
+    initStack();
   </script>
 </body>
 </html>
