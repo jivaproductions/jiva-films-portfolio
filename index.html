@@ -3,7 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jiva Films — Wedding & Lifestyle Photography</title>
+
+  <!-- SEO Meta Tags -->
+  <title>Jiva Films | Luxe Editorial Wedding & Lifestyle Photography</title>
+  <meta name="description" content="Capture your love story with timeless elegance. Jiva Films specializes in luxe, editorial wedding and lifestyle photography across India and worldwide.">
+  <meta name="keywords" content="wedding photography, luxe wedding photographer, editorial wedding photography, Jiva Films, destination wedding photographer India">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jivafilms.in">
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jivafilms.in">
+  <meta property="og:title" content="Jiva Films | Luxe Editorial Wedding Photography">
+  <meta property="og:description" content="Timeless, elegant, and authentic wedding photography capturing the essence of love.">
+  <meta property="og:image" content="https://jivafilms.in/images/wedding/SN_03513.webp">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://jivafilms.in">
+  <meta name="twitter:title" content="Jiva Films | Luxe Editorial Wedding Photography">
+  <meta name="twitter:description" content="Timeless, elegant, and authentic wedding photography capturing the essence of love.">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://jivafilms.in">
+  <meta name="twitter:title" content="Jiva Films | Luxe Editorial Wedding Photography">
+  <meta name="twitter:description" content="Timeless, elegant, and authentic wedding photography capturing the essence of love.">
+  <meta name="twitter:image" content="https://jivafilms.in/images/wedding/SN_03513.webp">
+
+  <link rel="icon" type="image/png" href="images/logo/JIVA FILMS WEBSITE LOGO.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -1668,7 +1696,7 @@
           </div>
         </div>
       </div>
-      <form class="contact-form reveal" id="contactForm">
+      <form class="contact-form reveal" id="contactForm" action="https://formspree.io/f/mnjrjzgr" method="POST">
         <div class="form-group">
           <input type="text" id="name" name="name" placeholder=" " required>
           <label for="name">Your Name</label>
@@ -1850,10 +1878,27 @@
     });
 
     // Contact form
-    document.getElementById('contactForm').addEventListener('submit', (e) => {
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      document.getElementById('contactForm').style.display = 'none';
-      document.getElementById('formSuccess').classList.add('show');
+      const form = e.target;
+      const data = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          form.style.display = 'none';
+          document.getElementById('formSuccess').classList.add('show');
+        } else {
+          alert('Something went wrong. Please try again.');
+        }
+      } catch (error) {
+        alert('Error sending message. Please check your connection.');
+      }
     });
 
     // 3D Film Card Stack
