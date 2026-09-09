@@ -64,6 +64,8 @@
       line-height: 1.6;
       font-weight: 300;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      width: 100%;
     }
 
     ::selection { background: var(--gold-soft); color: var(--charcoal); }
@@ -88,8 +90,8 @@
     }
 
     .reveal {
-      opacity: 0;
-      transform: translateY(30px);
+      opacity: 1;
+      transform: translateY(0);
       transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -254,6 +256,7 @@
     .hero-bg {
       position: absolute;
       inset: 0;
+      background-image: url('images/wedding/SN_03513.webp');
       background-size: cover;
       background-position: 80% center;
       transform: scale(1.05);
@@ -513,7 +516,6 @@
       height: auto;
       display: block;
       transition: transform 0.6s var(--ease-out), opacity 0.8s ease-in;
-      opacity: 0;
     }
     .collage-item img.loaded {
       opacity: 1;
@@ -975,6 +977,7 @@
       padding-bottom: 60px;
       z-index: 1;
       pointer-events: none;
+      contain: paint;
     }
 
     .marquee-track {
@@ -1243,19 +1246,19 @@
       <h3 class="folder-title">Wedding</h3>
       <div class="collage-grid">
         <div class="collage-item reveal" data-caption="Wedding">
-          <img src="images/wedding/P+M-644.webp" alt="Wedding" loading="lazy">
+          <img src="images/wedding/P+M-644.webp" alt="Wedding" fetchpriority="high">
           <div class="collage-caption">Wedding</div>
         </div>
         <div class="collage-item reveal" data-caption="Wedding">
-          <img src="images/wedding/D+N-110.webp" alt="Wedding" loading="lazy">
+          <img src="images/wedding/D+N-110.webp" alt="Wedding" fetchpriority="high">
           <div class="collage-caption">Wedding</div>
         </div>
         <div class="collage-item reveal" data-caption="Wedding">
-          <img src="images/wedding/P+S-555.webp" alt="Wedding" loading="lazy">
+          <img src="images/wedding/P+S-555.webp" alt="Wedding" fetchpriority="high">
           <div class="collage-caption">Wedding</div>
         </div>
         <div class="collage-item reveal" data-caption="Wedding">
-          <img src="images/wedding/P+S-950.webp" alt="Wedding" loading="lazy">
+          <img src="images/wedding/P+S-950.webp" alt="Wedding" fetchpriority="high">
           <div class="collage-caption">Wedding</div>
         </div>
         <div class="collage-item reveal" data-caption="Wedding">
@@ -1639,25 +1642,26 @@
           <div class="collage-caption">Wedding</div>
         </div>
       </div>
+    </div>
 
     <div class="folder-content" id="pre-wedding-content" style="display: none;">
       <button class="back-btn" onclick="closeFolder('pre-wedding')">← Back to Gallery</button>
       <h3 class="folder-title">Pre-Wedding</h3>
       <div class="collage-grid">
         <div class="collage-item reveal" data-caption="Pre-Wedding">
-          <img src="images/pre-wedding/IMG_4062.webp" alt="Pre-Wedding" loading="lazy">
+          <img src="images/pre-wedding/IMG_4062.webp" alt="Pre-Wedding" fetchpriority="high">
           <div class="collage-caption">Pre-Wedding</div>
         </div>
         <div class="collage-item reveal" data-caption="Pre-Wedding">
-          <img src="images/pre-wedding/IMG_4063.webp" alt="Pre-Wedding" loading="lazy">
+          <img src="images/pre-wedding/IMG_4063.webp" alt="Pre-Wedding" fetchpriority="high">
           <div class="collage-caption">Pre-Wedding</div>
         </div>
         <div class="collage-item reveal" data-caption="Pre-Wedding">
-          <img src="images/pre-wedding/IMG_4065.webp" alt="Pre-Wedding" loading="lazy">
+          <img src="images/pre-wedding/IMG_4065.webp" alt="Pre-Wedding" fetchpriority="high">
           <div class="collage-caption">Pre-Wedding</div>
         </div>
         <div class="collage-item reveal" data-caption="Pre-Wedding">
-          <img src="images/pre-wedding/P+S-1.webp" alt="Pre-Wedding" loading="lazy">
+          <img src="images/pre-wedding/P+S-1.webp" alt="Pre-Wedding" fetchpriority="high">
           <div class="collage-caption">Pre-Wedding</div>
         </div>
         <div class="collage-item reveal" data-caption="Pre-Wedding">
@@ -1764,17 +1768,6 @@
           <img src="images/pre-wedding/V+N-76.webp" alt="Pre-Wedding" loading="lazy">
           <div class="collage-caption">Pre-Wedding</div>
         </div>
-        <div class="collage-item reveal" data-caption="Pre-Wedding">
-          <img src="images/pre-wedding/Y+P-196.webp" alt="Pre-Wedding" loading="lazy">
-          <div class="collage-caption">Pre-Wedding</div>
-        </div>
-        <div class="collage-item reveal" data-caption="Pre-Wedding">
-          <img src="images/pre-wedding/Y+P-39.webp" alt="Pre-Wedding" loading="lazy">
-          <div class="collage-caption">Pre-Wedding</div>
-        </div>
-      </div>
-    </div>
-
   </section>
 
   <!-- Films -->
@@ -1910,7 +1903,7 @@
     if (marqueeTrack) {
       const content = marqueeImages.map(src => `
         <div class="marquee-item">
-          <img src="${src}" alt="Featured Work" loading="lazy">
+          <img src="${src}" alt="Featured Work">
         </div>
       `).join('');
       marqueeTrack.innerHTML = content + content;
@@ -1943,24 +1936,40 @@
     reveals.forEach(el => observer.observe(el));
 
     // Folder navigation
-    function openFolder(folderId) {
-      document.querySelector('.folder-grid').style.display = 'none';
-      document.querySelector('.gallery-header').style.display = 'none';
-      document.getElementById(folderId + '-content').style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.openFolder = function(folderId) {
+      const folderGrid = document.querySelector('.folder-grid');
+      const galleryHeader = document.querySelector('.gallery-header');
 
-      // Re-trigger reveal animations
-      setTimeout(() => {
-        document.querySelectorAll('#' + folderId + '-content .reveal').forEach((el, i) => {
-          setTimeout(() => el.classList.add('visible'), i * 80);
+      if (folderGrid) folderGrid.style.display = 'none';
+      if (galleryHeader) galleryHeader.style.display = 'none';
+
+      document.querySelectorAll('.folder-content').forEach(content => {
+        content.style.display = 'none';
+      });
+
+      const target = document.getElementById(folderId + '-content');
+      if (target) {
+        target.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        const revealElements = target.querySelectorAll('.reveal');
+        revealElements.forEach((el, i) => {
+          el.classList.add('visible');
         });
-      }, 100);
+      } else {
+        console.error('Could not find: ' + folderId + '-content');
+      }
     }
 
-    function closeFolder(folderId) {
-      document.getElementById(folderId + '-content').style.display = 'none';
-      document.querySelector('.folder-grid').style.display = 'grid';
-      document.querySelector('.gallery-header').style.display = 'block';
+    window.closeFolder = function(folderId) {
+      console.log('Closing folder:', folderId);
+      const targetContent = document.getElementById(folderId + '-content');
+      const folderGrid = document.querySelector('.folder-grid');
+      const galleryHeader = document.querySelector('.gallery-header');
+
+      if (targetContent) targetContent.style.display = 'none';
+      if (folderGrid) folderGrid.style.display = 'grid';
+      if (galleryHeader) galleryHeader.style.display = 'block';
     }
 
     // Collage lightbox
@@ -2103,12 +2112,15 @@
     function updateStack() {
       const lift = 0;
       const scale = 1;
+      const offset = window.innerWidth < 768 ? 120 : 270;
+      const rotateZ_val = window.innerWidth < 768 ? 10 : 16;
+      const z_val = window.innerWidth < 768 ? 80 : 140;
 
       cards.forEach((card, i) => {
         const off = i - activeFilmIndex;
-        const x = off * 270;
-        const rotateZ = off * 16;
-        const z = -Math.abs(off) * 140;
+        const x = off * offset;
+        const rotateZ = off * rotateZ_val;
+        const z = -Math.abs(off) * z_val;
 
         card.style.transform = `translateX(${x}px) translateY(${lift}px) rotateZ(${rotateZ}deg) translateZ(${z}px) scale(${scale})`;
         card.style.zIndex = 100 - Math.abs(off);
