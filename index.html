@@ -64,7 +64,6 @@
       line-height: 1.6;
       font-weight: 300;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
       width: 100%;
     }
 
@@ -144,7 +143,7 @@
 
     .nav-links {
       display: flex;
-      gap: 48px;
+      gap: clamp(24px, 4vw, 48px);
       list-style: none;
       justify-content: center;
       transition: all 0.6s var(--ease-smooth);
@@ -386,14 +385,15 @@
     }
 
     .gallery-title {
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(2rem, 8vw, 3rem);
       margin-bottom: 48px;
+      text-align: center;
     }
 
     /* Folder Grid */
     .folder-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 32px;
       max-width: 900px;
       margin: 0 auto 64px;
@@ -502,23 +502,39 @@
       padding: 0 24px;
     }
 
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
+    }
+
     .collage-item {
       position: relative;
       overflow: hidden;
       cursor: pointer;
-      background: var(--pearl);
+      background: linear-gradient(90deg, var(--pearl) 25%, var(--gold-soft) 50%, var(--pearl) 75%);
+      background-size: 1000px 100%;
+      animation: shimmer 2s infinite linear;
       break-inside: avoid;
       margin-bottom: 4px;
       transition: opacity 0.6s ease-in;
+      min-height: 100px;
     }
     .collage-item img {
       width: 100%;
       height: auto;
       display: block;
+      opacity: 0;
       transition: transform 0.6s var(--ease-out), opacity 0.8s ease-in;
     }
     .collage-item img.loaded {
       opacity: 1;
+    }
+    .collage-item img.loaded + .collage-caption {
+      /* No change here */
+    }
+    .collage-item:has(img.loaded) {
+      animation: none;
+      background: var(--pearl);
     }
     .collage-item:hover img { transform: scale(1.02); }
 
@@ -655,7 +671,7 @@
 
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 80px;
       max-width: 1200px;
       margin: 0 auto;
@@ -756,7 +772,7 @@
 
     .contact-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 80px;
       max-width: 1100px;
       margin: 0 auto;
@@ -877,6 +893,7 @@
       align-items: center;
       justify-content: center;
       perspective: 1100px;
+      overflow: hidden;
     }
 
     .stack-stage {
@@ -1156,8 +1173,8 @@
 
     /* ─── Section spacing for mobile ─── */
     @media (max-width: 768px) {
-      .intro, .testimonial, .about, .contact { padding: 64px 24px; }
-      .gallery { padding: 48px 0 80px; }
+      .intro, .testimonial, .about, .contact { padding: 80px 24px; }
+      .gallery { padding: 60px 0 100px; }
     }
   </style>
 </head>
